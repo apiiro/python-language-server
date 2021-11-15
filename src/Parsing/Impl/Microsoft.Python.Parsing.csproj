@@ -1,8 +1,13 @@
 ﻿<Project>
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Microsoft.Python.Parsing</RootNamespace>
     <AssemblyName>Microsoft.Python.Parsing</AssemblyName>
+    <PackageId>Microsoft.Python.Parsing</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Apiiro</Authors>
+    <Company>Apiiro</Company>
+    <RepositoryUrl>https://github.com/apiiro/python-language-server</RepositoryUrl>
   </PropertyGroup>
   <PropertyGroup>
     <!--
@@ -11,7 +16,6 @@
     <NoWarn>1701;1702;$(NoWarn)</NoWarn>
     <TieredCompilation>true</TieredCompilation>
   </PropertyGroup>
-  <Import Project="..\..\..\build\NetStandard.settings" />
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
   <ItemGroup>
     <PackageReference Include="MicroBuild.Core" Version="0.3.0">
@@ -41,5 +45,4 @@
     </None>
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
-  <Import Project="..\..\..\build\NetStandard.targets" />
 </Project>
