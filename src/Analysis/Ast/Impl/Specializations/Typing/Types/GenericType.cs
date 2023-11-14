@@ -128,10 +128,14 @@ namespace Microsoft.Python.Analysis.Specializations.Typing.Types {
                 throw new ArgumentException(@"Generic type instance construction arguments must be all of IPythonType", nameof(args));
             }
             var specific = CreateSpecificType(args);
-            return specific == null
+            return specific == null || IsSameType(specific)
                 ? DeclaringModule.Interpreter.UnknownType.CreateInstance(args)
                 : specific.CreateInstance(args);
         }
+
+        private bool IsSameType(IPythonType specific)
+            => specific.MemberType == PythonMemberType.Generic &&
+               this.Name == specific.Name;
 
         public IMember Call(IPythonInstance instance, string memberName, IArgumentSet args) => DeclaringModule.Interpreter.UnknownType;
         public IMember Index(IPythonInstance instance, IArgumentSet args) => DeclaringModule.Interpreter.UnknownType;

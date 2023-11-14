@@ -13,6 +13,7 @@
 // See the Apache Version 2.0 License for specific language governing
 // permissions and limitations under the License.
 
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -1412,6 +1413,23 @@ child = subdir / 'file.txt'
             analysis.Should().HaveVariable("root").OfType("Path");
             analysis.Should().HaveVariable("subdir").OfType("PurePath");
             analysis.Should().HaveVariable("child").OfType("PurePath");
+        }        
+
+        [TestMethod, Priority(0)]
+        public async Task GenericStackOverflowBub() {
+            /*
+             * Apiiro fix.
+             * The code below created stack overflow if SpecializedGenericType.CreateInstance
+             * Just checking we are not crushing here. 
+             */
+            const string code = @"
+from typing import Union, Sequence, TypeVar
+_T = TypeVar(""_T"")
+_NestedSequence = Sequence[Sequence[_T]]
+_ArrayLike = _NestedSequence[_T]
+";
+            await GetAnalysisAsync(code, PythonVersions.Python37);
+            Assert.IsTrue(true);
         }
     }
 }
