@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # NOTE:
-# Until we'll set the version as an argument make sure to change the version in the 'nuget push' lines to matach the version in binaries.
+# Until we'll set the version as an argument make sure to change the version in the 'nuget push' lines to match the version in binaries.
 
 WORK_DIR=`pwd`
 
