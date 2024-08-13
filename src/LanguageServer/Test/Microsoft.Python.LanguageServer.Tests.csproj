@@ -1,6 +1,6 @@
 ﻿<Project>
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <RootNamespace>Microsoft.Python.LanguageServer.Tests</RootNamespace>
     <AssemblyName>Microsoft.Python.LanguageServer.Tests</AssemblyName>
   </PropertyGroup>
@@ -24,14 +24,16 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
-    <PackageReference Include="Microsoft.Win32.Registry" Version="4.7.0" />
+    <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
     <PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
     <PackageReference Include="MicroBuild.Core" Version="0.3.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="NewtonSoft.Json" Version="13.0.3" />
     <PackageReference Include="NSubstitute" Version="4.2.2" />
+    <PackageReference Include="StreamJsonRpc" Version="2.18.48" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Analysis\Ast\Impl\Microsoft.Python.Analysis.csproj" />
