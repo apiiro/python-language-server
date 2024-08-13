@@ -4,7 +4,7 @@
     <RootNamespace>Microsoft.Python.Analysis</RootNamespace>
     <AssemblyName>Microsoft.Python.Analysis</AssemblyName>
     <PackageId>Microsoft.Python.Analysis</PackageId>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <Authors>Apiiro</Authors>
     <Company>Apiiro</Company>
     <RepositoryUrl>https://github.com/apiiro/python-language-server</RepositoryUrl>
