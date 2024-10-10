@@ -1,6 +1,7 @@
 ﻿<Project>
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
+    <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
     <RootNamespace>Microsoft.Python.Analysis</RootNamespace>
     <AssemblyName>Microsoft.Python.Analysis.Core</AssemblyName>
     <PackageId>Microsoft.Python.Analysis.Core</PackageId>

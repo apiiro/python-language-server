@@ -1,6 +1,7 @@
 ﻿<Project>
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
+    <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
     <RootNamespace>Microsoft.Python.Core</RootNamespace>
     <AssemblyName>Microsoft.Python.Core</AssemblyName>
     <PackageId>Microsoft.Python.Core</PackageId>
