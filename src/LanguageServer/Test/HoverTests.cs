@@ -316,5 +316,32 @@ os.mkdir()
                 hover.range.Should().Be((Range)span.Value);
             }
         }
+
+        [TestMethod, Priority(0)]
+        public async Task GenericMethodReturningTypeVar() {
+            // Building hover documentation for a generic method whose return type is a
+            // TypeVar (here resolved to a collection type) must not throw.
+            const string code = @"
+from typing import Generic, Type, TypeVar
+
+T = TypeVar('T')
+
+class Container(Generic[T]):
+    def __init__(self, schema: Type[T]) -> None:
+        self.schema = schema
+
+    def get(self) -> T: ...
+
+c = Container(schema=dict)
+c.get()
+";
+            var analysis = await GetAnalysisAsync(code);
+            var hs = new HoverSource(new PlainTextDocumentationSource());
+
+            var hover = hs.GetHover(analysis, new SourceLocation(13, 4));
+
+            hover.Should().NotBeNull();
+            hover.contents.value.Should().Contain("get");
+        }
     }
 }
