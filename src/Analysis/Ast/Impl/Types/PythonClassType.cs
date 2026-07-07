@@ -143,6 +143,9 @@ namespace Microsoft.Python.Analysis.Types {
 
         // Constructor call
         public override IMember CreateInstance(IArgumentSet args) {
+            if (args == null) {
+                return new PythonInstance(this);
+            }
             var builtins = DeclaringModule.Interpreter.ModuleResolution.BuiltinsModule;
             // Specializations
             switch (Name) {
