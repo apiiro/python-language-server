@@ -27,12 +27,18 @@ namespace Microsoft.Python.Parsing.Tests {
         public static readonly InterpreterConfiguration Python37 = GetCPythonVersion(PythonLanguageVersion.V37, InterpreterArchitecture.x86);
         public static readonly InterpreterConfiguration Python38 = GetCPythonVersion(PythonLanguageVersion.V38, InterpreterArchitecture.x86);
         public static readonly InterpreterConfiguration Python39 = GetCPythonVersion(PythonLanguageVersion.V39, InterpreterArchitecture.x86);
+        public static readonly InterpreterConfiguration Python310 = GetCPythonVersion(PythonLanguageVersion.V310, InterpreterArchitecture.x86);
+        public static readonly InterpreterConfiguration Python311 = GetCPythonVersion(PythonLanguageVersion.V311, InterpreterArchitecture.x86);
+        public static readonly InterpreterConfiguration Python312 = GetCPythonVersion(PythonLanguageVersion.V312, InterpreterArchitecture.x86);
         public static readonly InterpreterConfiguration Python27_x64 = GetCPythonVersion(PythonLanguageVersion.V27, InterpreterArchitecture.x64);
         public static readonly InterpreterConfiguration Python35_x64 = GetCPythonVersion(PythonLanguageVersion.V35, InterpreterArchitecture.x64);
         public static readonly InterpreterConfiguration Python36_x64 = GetCPythonVersion(PythonLanguageVersion.V36, InterpreterArchitecture.x64);
         public static readonly InterpreterConfiguration Python37_x64 = GetCPythonVersion(PythonLanguageVersion.V37, InterpreterArchitecture.x64);
         public static readonly InterpreterConfiguration Python38_x64 = GetCPythonVersion(PythonLanguageVersion.V38, InterpreterArchitecture.x64);
         public static readonly InterpreterConfiguration Python39_x64 = GetCPythonVersion(PythonLanguageVersion.V39, InterpreterArchitecture.x64);
+        public static readonly InterpreterConfiguration Python310_x64 = GetCPythonVersion(PythonLanguageVersion.V310, InterpreterArchitecture.x64);
+        public static readonly InterpreterConfiguration Python311_x64 = GetCPythonVersion(PythonLanguageVersion.V311, InterpreterArchitecture.x64);
+        public static readonly InterpreterConfiguration Python312_x64 = GetCPythonVersion(PythonLanguageVersion.V312, InterpreterArchitecture.x64);
         public static readonly InterpreterConfiguration Anaconda27 = GetAnacondaVersion(PythonLanguageVersion.V27, InterpreterArchitecture.x86);
         public static readonly InterpreterConfiguration Anaconda27_x64 = GetAnacondaVersion(PythonLanguageVersion.V27, InterpreterArchitecture.x64);
         public static readonly InterpreterConfiguration Anaconda36 = GetAnacondaVersion(PythonLanguageVersion.V36, InterpreterArchitecture.x86);
@@ -70,6 +76,14 @@ namespace Microsoft.Python.Parsing.Tests {
         public static InterpreterConfiguration LatestAvailable => LatestAvailable3X ?? LatestAvailable2X;
 
         public static InterpreterConfiguration LatestAvailable3X => GetVersions(
+            Python312,
+            Python312_x64,
+            Python311,
+            Python311_x64,
+            Python310,
+            Python310_x64,
+            Python39,
+            Python39_x64,
             Python38,
             Python38_x64,
             Python37,

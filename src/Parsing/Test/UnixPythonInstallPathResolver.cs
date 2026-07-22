@@ -50,8 +50,13 @@ namespace Microsoft.Python.Parsing.Tests {
                     var filePaths = Directory.EnumerateFiles(folder)
                         .Where(p => _pythonNameRegex.IsMatch(Path.GetFileName(p)));
                     foreach (var filePath in filePaths) {
-                        var configuration = GetConfiguration("Python Core", filePath);
-                        _coreCache.TryAdd(configuration.Version, configuration);
+                        try {
+                            var configuration = GetConfiguration("Python Core", filePath);
+                            _coreCache.TryAdd(configuration.Version, configuration);
+                        } catch (Exception) {
+                            // Broken or partially-installed interpreters (e.g. stale pyenv
+                            // shims) must not fail discovery of the remaining ones.
+                        }
                     }
                 } catch (IOException) {
                 }
@@ -71,9 +76,13 @@ namespace Microsoft.Python.Parsing.Tests {
             }
 
             foreach (var path in paths) {
-                var configuration = GetConfiguration("Conda", path);
-                _coreCache.TryAdd(configuration.Version, configuration);
-                _condaCache.TryAdd(configuration.Version, configuration);
+                try {
+                    var configuration = GetConfiguration("Conda", path);
+                    _coreCache.TryAdd(configuration.Version, configuration);
+                    _condaCache.TryAdd(configuration.Version, configuration);
+                } catch (Exception) {
+                    // Broken or partially-installed interpreters must not fail discovery.
+                }
             }
         }
 

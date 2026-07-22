@@ -25,7 +25,7 @@ namespace Microsoft.Python.Analysis.Types.Collections {
         }
 
         public override IMember CreateInstance(IArgumentSet args) {
-            var contents = args.Arguments.Count == 1
+            var contents = args?.Arguments?.Count == 1
                 ? args.Arguments[0].Value as IReadOnlyDictionary<IMember, IMember>
                 : EmptyDictionary<IMember, IMember>.Instance;
             return new PythonDictionary(this, contents);
