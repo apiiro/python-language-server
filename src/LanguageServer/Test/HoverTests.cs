@@ -189,8 +189,8 @@ from os.path import join as JOIN
             var name = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? @"ntpath" : @"posixpath";
             AssertHover(hs, analysis, new SourceLocation(2, 10), $"module {name}*", new SourceSpan(2, 9, 2, 13));
 
-            AssertHover(hs, analysis, new SourceLocation(2, 22), @"join(path: str, *paths: str) -> str", new SourceSpan(2, 21, 2, 25));
-            AssertHover(hs, analysis, new SourceLocation(2, 30), @"join(path: str, *paths: str) -> str", new SourceSpan(2, 29, 2, 33));
+            AssertHover(hs, analysis, new SourceLocation(2, 22), @"join(path: str, *paths: str) -> str*", new SourceSpan(2, 21, 2, 25));
+            AssertHover(hs, analysis, new SourceLocation(2, 30), @"join(path: str, *paths: str) -> str*", new SourceSpan(2, 29, 2, 33));
         }
 
         [TestMethod, Priority(0)]
@@ -342,6 +342,38 @@ c.get()
 
             hover.Should().NotBeNull();
             hover.contents.value.Should().Contain("get");
+        }
+
+        [TestMethod, Priority(0)]
+        public async Task GenericMethodReturningTypeVarResolvedToDict() {
+            // Building hover documentation for a method of a multi-parameter generic
+            // class whose TypeVar return type resolves to a dict specialization must
+            // not throw (PythonDictionaryType.CreateInstance receives a null argument
+            // set on this path).
+            const string code = @"
+from typing import Generic, TypeVar
+
+A = TypeVar('A')
+B = TypeVar('B')
+
+class Mapper(Generic[A, B]):
+    def __init__(self, forward: dict[A, B]):
+        self._forward = forward
+        self._backward: dict[B, A] = {b: a for a, b in forward.items()}
+
+    def convert(self, value: B) -> A:
+        return self._backward[value]
+
+mapper = Mapper({'one': 1})
+mapper.convert(1)
+";
+            var analysis = await GetAnalysisAsync(code);
+            var hs = new HoverSource(new PlainTextDocumentationSource());
+
+            var hover = hs.GetHover(analysis, new SourceLocation(16, 10));
+
+            hover.Should().NotBeNull();
+            hover.contents.value.Should().Contain("convert");
         }
     }
 }
